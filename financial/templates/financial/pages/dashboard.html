@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Corona Dashboard - Bootstrap</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --sidebar: #101726;
+      --card: #141c2c;
+      --card-2: #1a2336;
+      --text: #e8edf7;
+      --muted: #7f8aa3;
+      --line: #222d43;
+      --green: #22c55e;
+      --red: #ef4444;
+      --purple: #7c3aed;
+      --yellow: #f59e0b;
+      --blue: #3b82f6;
+      --pink: #e11d48;
+    }
+
+    body {
+      background: #000;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    .app-shell {
+      min-height: 100vh;
+      background: var(--bg);
+    }
+
+    .sidebar {
+      width: 240px;
+      min-height: 100vh;
+      background: linear-gradient(180deg, #0f1524 0%, #101726 100%);
+      border-right: 1px solid rgba(255,255,255,.04);
+      position: sticky;
+      top: 0;
+    }
+
+    .brand {
+      letter-spacing: .35rem;
+      font-weight: 700;
+      font-size: 1.9rem;
+    }
+
+    .avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ffb36b, #8b5cf6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .nav-link-custom {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 12px 16px;
+      border-radius: 16px;
+      transition: .2s ease;
+      margin-bottom: 8px;
+    }
+
+    .nav-link-custom:hover,
+    .nav-link-custom.active {
+      background: rgba(0,0,0,.35);
+      color: #fff;
+    }
+
+    .nav-dot {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,.06);
+      font-size: .8rem;
+    }
+
+    .topbar {
+      background: #0f1524;
+      border-bottom: 1px solid rgba(255,255,255,.04);
+    }
+
+    .search-box {
+      background: #11192a;
+      border: 1px solid #1d2940;
+      color: #fff;
+      border-radius: 10px;
+      padding-left: 42px;
+    }
+
+    .search-box:focus {
+      background: #11192a;
+      color: #fff;
+      border-color: #2d3b5b;
+      box-shadow: none;
+    }
+
+    .search-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .search-wrap i {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+    }
+
+    .btn-create {
+      background: #5ad35a;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-weight: 600;
+    }
+
+    .content-area {
+      padding: 1.5rem;
+    }
+
+    .promo-card,
+    .stat-card,
+    .panel-card,
+    .mini-card {
+      background: linear-gradient(180deg, var(--card) 0%, #111827 100%);
+      border: 1px solid rgba(255,255,255,.03);
+      border-radius: 10px;
+    }
+
+    .promo-card {
+      background: linear-gradient(90deg, #a21caf 0%, #f43f5e 100%);
+      min-height: 86px;
+    }
+
+    .promo-illustration {
+      width: 72px;
+      height: 72px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+
+    .btn-ghost-light {
+      border: 1px solid rgba(255,255,255,.25);
+      color: #fff;
+      border-radius: 999px;
+      padding: 10px 20px;
+      background: transparent;
+    }
+
+    .stat-card {
+      padding: 1.4rem;
+      min-height: 120px;
+    }
+
+    .stat-title {
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 500;
+    }
+
+    .badge-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .95rem;
+      font-weight: 700;
+    }
+
+    .badge-green { background: rgba(34,197,94,.12); color: #4ade80; }
+    .badge-red { background: rgba(239,68,68,.12); color: #f87171; }
+
+    .panel-card {
+      padding: 1.5rem;
+      min-height: 100%;
+    }
+
+    .donut {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: conic-gradient(#fbbf24 0 25%, #22c55e 25% 50%, #0a0a0a 50% 100%);
+      display: grid;
+      place-items: center;
+      margin: 0 auto 1.5rem;
+    }
+
+    .donut::after {
+      content: '';
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      background: #151d2d;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.02);
+    }
+
+    .donut-center {
+      position: absolute;
+      text-align: center;
+      z-index: 2;
+    }
+
+    .donut-wrap {
+      position: relative;
+    }
+
+    .transaction-item {
+      background: #0f1626;
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+    }
+
+    .project-row {
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+
+    .project-row:last-child { border-bottom: none; }
+
+    .project-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .bg-soft-blue { background: #3b82f6; }
+    .bg-soft-green { background: #84cc16; }
+    .bg-soft-purple { background: #8b5cf6; }
+    .bg-soft-red { background: #ef4444; }
+    .bg-soft-yellow { background: #f59e0b; }
+
+    .muted { color: var(--muted); }
+
+    .mini-card {
+      min-height: 90px;
+      padding: 1.5rem;
+    }
+
+    @media (max-width: 991.98px) {
+      .sidebar {
+        width: 100%;
+        min-height: auto;
+        position: relative;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container-fluid app-shell px-0">
+    <div class="row g-0">
+      <!-- Sidebar -->
+      <aside class="col-lg-auto sidebar p-3">
+        <div class="brand mb-4">Analu Sweets</div>
+
+        <div class="d-flex align-items-center gap-3 mb-4">
+          <div class="avatar">AL</div>
+          <div>
+            <div class="fw-semibold">Ana Luiza</div>
+            <small class="muted">Administrador(a)</small>
+          </div>
+        </div>
+
+        <small class="muted d-block mb-3 text-uppercase">Navegação</small>
+
+        <nav>
+          <a href="#" class="nav-link-custom active">
+            <span class="nav-dot text-purple"><i class="bi bi-grid"></i></span>
+            Dashboard
+          </a>
+          <a href="#" class="nav-link-custom"><span class="nav-dot text-warning"><i class="bi bi-puzzle"></i></span>Vendas</a>
+          <a href="#" class="nav-link-custom"><span class="nav-dot text-danger"><i class="bi bi-layout-text-window"></i></span>Depesas</a>
+          <a href="#" class="nav-link-custom"><span class="nav-dot text-primary"><i class="bi bi-columns-gap"></i></span>Contas a Pagar</a>
+          <a href="#" class="nav-link-custom"><span class="nav-dot text-success"><i class="bi bi-box"></i></span>Unidade</a>
+          <a href="#" class="nav-link-custom"><span class="nav-dot text-info"><i class="bi bi-stars"></i></span>Insumos</a>
+          <a href="#" class="nav-link-custom"><span class="nav-dot text-warning"><i class="bi bi-ui-checks-grid"></i></span>Receitas</a>
+        </nav>
+      </aside>
+
+      <!-- Main -->
+      <main class="col">
+        <header class="topbar px-4 py-3 d-flex flex-wrap align-items-center justify-content-between gap-3">
+          <div class="search-wrap">
+            <i class="bi bi-search"></i>
+            <input type="text" class="form-control search-box" placeholder="Search products">
+          </div>
+
+          <div class="d-flex align-items-center gap-3">
+            <button class="btn btn-create">+ Criar nova receita</button>
+            <i class="bi bi-square text-light opacity-75"></i>
+            <i class="bi bi-bell text-light opacity-75"></i>
+            <i class="bi bi-flag text-light opacity-75"></i>
+            <div class="d-flex align-items-center gap-2">
+              <div class="avatar" style="width:36px;height:36px;font-size:.8rem;">HK</div>
+              <span class="small">Ana Luiza</span>
+            </div>
+          </div>
+        </header>
+
+        <section class="content-area">
+          <div class="promo-card p-4 mb-4 d-flex align-items-center justify-content-between flex-wrap gap-3">
+            <div class="d-flex align-items-center gap-4">
+              <div class="promo-illustration">
+                <i class="bi bi-clipboard-check"></i>
+              </div>
+              <div>
+                <h4 class="mb-1">lorem ipsum</h4>
+                <p class="mb-0 text-white-50">Consectetur mollitia sed iusto soluta. Doloremque enim maiores a autem. Eveniet quo animi quo. Sed exercitationem omnis vitae laborum voluptas dolorem!</p>
+              </div>
+            </div>
+            <button class="btn-ghost-light">Get Started</button>
+          </div>
+
+          <div class="row g-4 mb-4">
+              <div class="panel-card h-100">
+                <h3 class="h4 mb-4">Dashboard</h3>
+
+                <div class="donut-wrap mb-4 d-flex justify-content-center">
+                  <div class="donut"></div>
+                  <div class="donut-center">
+                    <div class="fs-4">$1200</div>
+                    <small class="muted">Total</small>
+                  </div>
+                </div>
+            </div>
+
+
+          <div class="row g-4">
+            <div class="col-md-4">
+              <div class="mini-card"><h4 class="mb-0">Receita</h4></div>
+            </div>
+            <div class="col-md-4">
+              <div class="mini-card"><h4 class="mb-0">Vendas</h4></div>
+            </div>
+            <div class="col-md-4">
+              <div class="mini-card"><h4 class="mb-0">Compras</h4></div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+</body>
+</html>
